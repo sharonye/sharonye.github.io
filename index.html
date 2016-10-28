@@ -1,0 +1,36 @@
+---
+layout: default
+---
+
+<div class="home">
+
+  <!-- <h1 class="page-heading">Posts</h1> -->
+
+  <ul class="post-list">
+    {% for post in site.posts %}
+      <li>
+        <h2>
+          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </h2>
+
+        <span class="post-date">发布于 {{ post.date | date: "%F" }}</span>
+
+        <div class="post-content">{{post.content}}</div>
+
+        {% if post.tags | size != 0 %}
+          <ul class="tagslist">
+          {% for item in post.tags %}
+            <li><a href="" title="">{{item}}</a></li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+
+        <!-- <a href="{{ post.url | prepend: site.baseurl }}" class="read-more">阅读全文 &gt;</a> -->
+
+      </li>
+    {% endfor %}
+  </ul>
+
+  <!-- <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p> -->
+
+</div>

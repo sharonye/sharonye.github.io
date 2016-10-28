@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+  {% include head.html %}
+
+  <body>
+
+    {% include header.html %}
+
+    <div class="page-content">
+      <div class="wrapper">
+        <!-- <div class="rolling-pink"></div> -->
+        {% include sidebar.html %}
+        {{ content }}
+      </div>
+    </div>
+
+    {% include totop.html %}
+
+    {% include footer.html %}
+
+    {% include jsblock.html %}
+
+  </body>
+
+</html>

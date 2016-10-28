@@ -1,0 +1,55 @@
+---
+layout: post
+title:  测试markdown样式
+date:   2016-10-8 17:05:06 +0800
+categories: 前端
+tags: 
+- f2e 
+- markdown
+---
+
+# 一级标题
+
+## 二级标题
+
+### 三级标题
+
+#### 四级标题
+
+##### 五级标题
+
+###### 六级标题
+
+> 这是一个引用的段落这是一个引用的段落这是一个引用的段落这是一个引用的段落这是一个引用的段落这是一个引用的段落。
+
+`单行代码 $ git push -u origin master` 
+
+- 无序列表第一项
+
+- 无序列表第二项
+
+- 无序列表第三项
+
+```javascript
+//这是一个代码块
+$(window).scroll(function(){
+	var scrollTop=$(window).scrollTop();
+	if(scrollTop>=navTop){
+		nav.addClass('fixed-top');
+	}
+	else{
+		 nav.removeClass('fixed-top'); 
+	}
+	if(btn.length>0){
+		var btnTop=btn.offset().top;
+		if(btnTop&&scrollTop>=btnTop){
+			nav.addClass('signup');
+		}
+		else{
+			nav.removeClass('signup'); 
+		}
+	}	
+});
+```
+
+这是一个**普通文本段**这是一个普通文本段这是一个普通文本段这是一个**普通文本段**这是一个普通文本段这是一个普通文本段。这是一个普通文本段这是一个普通文本段这是一个普通文本段这是一个普通文本段这是一个普通文本段这是一个普通文本段。这是一个普通文本段这是一个普通文本段这是一个普通文本段这是一个普通文本段这是一个普通文本段这是一个普通文本段。[这是一个链接](#) 

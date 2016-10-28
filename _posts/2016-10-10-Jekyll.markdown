@@ -1,0 +1,94 @@
+---
+layout: post
+title:  GitHub Pages + Jekyll 搭建个人blog
+date:   2016-10-10 17:05:06 +0800
+categories: 前端 笔记
+tags: 
+- jekyll 
+- GitHub Pages
+---
+
+最近开始意识到有条理地整理学习笔记的重要性，所以搭建这个博客一是觉得有趣，二来也是为了督促自己做好平时学习的记录，梳理思路加深印象并且方便今后的回顾复习。那么第一篇文章就记录一下搭建这个博客的过程吧。
+
+### Jekyll
+
+GitHub官方推荐使用**Bundler**来安装和运行Jekyll，Bundler需使用**Ruby**来安装，所以如果系统里没有Ruby则需要先安装Ruby。
+对于Windows系统，需要用**rubyinstaller**来安装Ruby，同时安装相应版本的**DevKit**（[到这里下载][1]）
+
+- 安装时注意勾选 Add Ruby executables to your PATH
+- 将DevKit解压后，命令行下进入解压目录  
+`$ ruby dk.rb init`
+- 此时产生一个config.yml文件，用编辑器打开它，如果文件最后没有Ruby的路径（如：- C:/Ruby23-x64）手动加上即可
+- 回到命令行下  
+`$ ruby dk.rb install`
+
+**然后就可以开始安装Bundler啦~**  
+`$ gem install bundler`
+    
+    
+---
+关于**Gem**这里再补充一点：
+由于众所周知的原因（手动滑稽），国内开发者安装Gem大多都使用淘宝镜像 **ruby.taobao.org**，由于现在已经停止维护了（原因可见这篇文章：[Ruby China 的 RubyGems 镜像上线][2]），建议使用新的Gem源 **gems.ruby-china.org**
+
+使用方式：  
+`$ gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/`
+
+由于我们要使用Bundle，可以用Bundle的Gem源代码镜像命令：  
+`$ bundle config mirror.https://rubygems.org https://gems.ruby-china.org`  
+这样就不用改 Gemfile 的 source了
+
+> source 'https://rubygems.org/'  
+> gem 'rails', '4.2.5'  
+> ...
+
+（参见 [RubyGems 镜像- Ruby China][3]）  
+  
+
+---
+  
+接下来就创建一个本地的仓库来存放Jekyll页面吧
+
+- 首先，你的系统里需要安装有git，如果没有请到这里安装→[git官网下载地址][4]  
+- 初始化一个空的仓库（如将其命名为my-blog）并进入目录底下  
+`$ git init my-blog`  
+`$ cd my-blog`
+
+- 在仓库根目录下新建一个名为Gemfile的文件写入以下内容并保存  
+
+> source 'https://rubygems.org'  
+> gem 'github-pages', group: :jekyll_plugins
+
+- 命令行下执行  
+`$ bundle install`
+
+- 想要更快速地建立一个blog，可以直接下载一个主题（[Jekyll Themes][5]）并将文件copy到自己目录底下
+- 可以在本地运行起来啦  
+`$ bundle exec jekyll serve`
+- 打开浏览器，输入`http://localhost:4000`即可预览网页效果
+- 根据自己需求尽情修改Jekyll主题吧
+
+当然了，作为一个前端，相对于用别人的主题，还是更倾向自己来设计整个blog的布局与样式，所以这里还是使用了自己写的代码，虽然暂时只是个大体的框架，还不甚美观，不过今后会慢慢完善优化，一点点装修自己小窝的感觉还是很不错哒~^^
+
+
+### GitHub Pages
+
+- 登录GitHub新建一个仓库将其命名为 *username*.github.io （此处*username*必须与你的用户名相同）
+- 将仓库内容clone到本地文件夹  
+`$ git clone https://github.com/username/username.github.io`
+- 进入项目文件夹  
+`$ cd username.github.io`
+- 将Jekyll目录下的所有文件copy到此文件夹内
+- push到GitHub上去  
+`$ git add --all`  
+`$ git commit -m "Initial commit"`  
+`$ git push -u origin master`  
+- 在浏览器中打开 http://username.github.io 就可以看到你的blog啦~
+
+
+
+
+[1]: http://rubyinstaller.org/downloads/
+[2]: https://ruby-china.org/topics/29250
+[3]: https://gems.ruby-china.org/
+[4]: https://git-scm.com/downloads
+[5]: http://jekyllthemes.org/
