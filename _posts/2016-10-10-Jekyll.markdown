@@ -2,7 +2,7 @@
 layout: post
 title:  GitHub Pages + Jekyll 搭建个人blog
 date:   2016-10-10 17:05:06 +0800
-categories: 前端 笔记
+categories: jekyll update
 tags: 
 - jekyll 
 - GitHub Pages

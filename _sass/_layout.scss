@@ -146,6 +146,11 @@ body{
 	}
 }
 
+/* collapse catalog */
+#collapse-catalog{
+
+}
+
 /* content */
 .page-content{
 	margin-bottom:30px;
@@ -539,6 +544,27 @@ body{
 					font-size:14px;
 				}
 			}
+		}
+		.relative-posts{
+			margin-bottom:30px;
+			li{
+				font-size:12px;
+				margin-bottom:10px;
+				span{
+					margin-right:10px;
+				}
+				a{
+					color:$theme-pink;
+					text-decoration:underline;
+				}
+			}
+		}
+		@media screen and (min-width: 768px) {
+		    .relative-posts{
+    			li{
+    				font-size:14px;
+    			}
+    		}
 		}
 	}
 }
