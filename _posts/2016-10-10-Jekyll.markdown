@@ -2,8 +2,9 @@
 layout: post
 title:  GitHub Pages + Jekyll 搭建个人blog
 date:   2016-10-10 17:05:06 +0800
-categories: jekyll update
-tags: 
+categories: 前端笔记
+tags:
+- f2e 
 - jekyll 
 - GitHub Pages
 ---
@@ -19,12 +20,14 @@ GitHub官方推荐使用**Bundler**来安装和运行Jekyll，Bundler需使用**
 - 将DevKit解压后，命令行下进入解压目录  
 `$ ruby dk.rb init`
 - 此时产生一个config.yml文件，用编辑器打开它，如果文件最后没有Ruby的路径（如：- C:/Ruby23-x64）手动加上即可
+
+<!--more-->
+
 - 回到命令行下  
 `$ ruby dk.rb install`
 
 **然后就可以开始安装Bundler啦~**  
-`$ gem install bundler`
-    
+`$ gem install bundler`    
     
 ---
 关于**Gem**这里再补充一点：

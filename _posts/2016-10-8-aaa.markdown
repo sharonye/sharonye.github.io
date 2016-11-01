@@ -2,7 +2,7 @@
 layout: post
 title:  测试markdown样式
 date:   2016-10-8 17:05:06 +0800
-categories: 前端
+categories: 前端笔记
 tags: 
 - f2e 
 - markdown
@@ -22,6 +22,7 @@ tags:
 
 > 这是一个引用的段落这是一个引用的段落这是一个引用的段落这是一个引用的段落这是一个引用的段落这是一个引用的段落。
 
+<!--more-->
 `单行代码 $ git push -u origin master` 
 
 - 无序列表第一项

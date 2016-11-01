@@ -30,20 +30,24 @@ layout: default
     <div class="relative-posts">
       <ul>
         {% if page.previous %}
-          <li><span>上一篇:</span><a href="{{page.previous.url | prepend: site.baseurl}}">{{page.previous.title}}</a></li>
+          <li><span>上一篇:</span><a href="{{page.previous.url}}">{{page.previous.title}}</a></li>
         {% else %}
           <li><span>上一篇:</span><span>没有更多了┑(￣Д ￣)┍</span></li>
         {% endif %}
         {% if page.next %}
-          <li><span>下一篇:</span><a href="{{page.next.url | prepend: site.baseurl}}">{{page.next.title}}</a></li>
+          <li><span>下一篇:</span><a href="{{page.next.url}}">{{page.next.title}}</a></li>
         {% else %}
           <li><span>下一篇:</span><span>没有更多了┑(￣Д ￣)┍</span></li>
         {% endif %}
       </ul>
     </div>
 
-    <div class="comment-block">
-      <p>评论功能暂未开放，有什么想说的你就憋着吧（笑）</p>
+    <div class="comment-block" id="comments">
+      <!-- <p>评论功能暂未开放，有什么想说的你就憋着吧（笑）</p> -->
+
+      <!-- 多说评论框 start -->
+      <div class="ds-thread" data-thread-key="{{ page.id }}" data-title="{{ page.title }}" data-url="{{ page.url}}"></div>
+      <!-- 多说评论框 end -->
     </div>
 
   </article>

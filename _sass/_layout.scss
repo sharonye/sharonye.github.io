@@ -1,5 +1,6 @@
 /* ******* text color ******** */
 $text_light: #999;
+$text_dark: #333;
 $primary_title: #cd7675;
 $secondary_title: #886f5e;
 $emphasize_text:#886f5e;
@@ -120,9 +121,9 @@ body{
 
 /* to-top */
 #to-top{
-	width: 30px;
-	height: 30px;
-	line-height:30px;
+	width: 36px;
+	height: 36px;
+	line-height:36px;
 	text-align:center;
 	background-color: $theme_pink;
 	border-radius:50%;
@@ -132,6 +133,7 @@ body{
 	bottom:70px;
 	right:30px;
 	cursor:pointer;
+	z-index:9;
 	display:none;
 	span{
 		font-size:12px;
@@ -254,6 +256,18 @@ body{
 			}
 		}
 	}
+	.comment-list{
+		>div{
+			color:$text_light;
+			padding:0 10px;
+			.ds-thread-title a{
+				color:$theme_pink;
+			}
+			.ds-excerpt{
+				color:$text_dark;
+			}
+		}
+	}
 }
 
 /* home */
@@ -322,12 +336,28 @@ body{
 				}
 			}
 		}
+		.ds-thread-count{
+			font-size:12px;
+			color:$theme-pink;
+			position:absolute;
+			right:30px;
+			bottom:22px;
+		}
+		.read-more{
+			font-size:12px;
+			color:$theme-pink;
+			position:absolute;
+			left:0;
+			bottom:5px;
+			text-decoration:none;
+		}
 	}
 }
 
 .post-content{
+	position:relative;
 	margin: 20px 0;
-	padding:20px 0;
+	padding:20px 0 30px;
 	font-size:14px;
 	line-height:1.6;
 	border-top:1px solid $border_light;
@@ -448,7 +478,7 @@ body{
 .post{
 	overflow:hidden;
 	article{
-		padding:20px;
+		padding:40px 20px;
 		margin-bottom:30px;
 		background-color: #fff;
 		border:1px solid $border_light;
@@ -482,7 +512,7 @@ body{
 					background-color: #ece9e6;
 				}
 				&:before{
-					content:'目录：';
+					content:'分类：';
 					display:inline-block;
 					font-size:12px;
 				}
@@ -529,21 +559,7 @@ body{
 			}
 		}
 		.comment-block{
-			text-align:center;
-			padding:10px 0 20px;
-			p{
-				display:inline-block;
-				font-size:12px;
-				padding:10px;
-				border:1px dashed $theme_pink;
-			}
-		}
-		@media screen and (min-width: 768px) and (max-width: 992px) {
-		    .comment-block{
-				p{
-					font-size:14px;
-				}
-			}
+			margin-bottom: 20px;
 		}
 		.relative-posts{
 			margin-bottom:30px;
