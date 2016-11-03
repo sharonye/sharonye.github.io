@@ -1,0 +1,92 @@
+---
+layout: post
+title:  关于ECharts使用中颜色的设置
+date:   2016-11-03 16:00:06 +0800
+categories: 前端笔记
+tags:
+- f2e 
+- ECharts 
+---
+
+在使用ECharts地图的时候，因为需要对不同值域使用不同颜色来标记，于是设置了`dataRange`，配置如下：
+
+```javascript
+//根据data数值分区段显示不同的颜色
+dataRange: {
+    splitList: [
+        {
+            start: 0,
+            end: 100,
+            color:'#a3e4e3'
+        },
+        {
+            start: 101,
+            end: 200,
+            color:'#6bcbca'
+        },
+        {
+            start: 201,
+            end: 300,
+            color:'#97ce68'
+        },
+        {
+            start: 301,
+            end: 400,
+            color:'#ffa60b'
+        }
+    ]
+}
+```
+
+<!--more-->
+
+在配置另外一个柱形图的时候，本来打算也用这个方式，结果发现行不通，官方文档里并没有说明这个参数只对地图有效，时间关系暂未验证其他图表类型，anyway，换了种方式来做柱形图的值域划分，对color参数使用`function`来返回每个值域所对应的颜色：
+
+```javascript
+//根据data数值分区段显示不同的颜色
+itemStyle: {
+    normal: {
+        color: function(params){
+            if(params.data<=100){
+                return '#a3e4e3';
+            }
+            else if(params.data<=200){
+                return '#6bcbca';
+            }
+            else if(params.data<=300){
+                return '#97ce68';
+            }
+            else{
+                return '#ffa60b';
+            }
+        }
+    }
+}
+```
+
+总的来说ECharts还是比较好用的，基本上从官方给出的实例中选择一个与需求相近的，通过修改参数都能达到预期的效果。官方提供了很多种类型的图表，项目中暂时只接触了`line`、`map`和`bar`三种类型，所以这里还需注意的一点就是按需加载所需图表：
+
+```javascript
+//官方文档给出的例子
+require.config({
+    paths: {
+        echarts: './js/dist'
+    }
+});
+require(
+    [
+        'echarts',
+        'echarts/chart/line',
+        'echarts/chart/bar'
+    ],
+    function (ec) {
+        var myChart = ec.init(document.getElementById('main'));
+        var option = {
+            ...
+        }
+        myChart.setOption(option);
+    }
+);
+```
+
+好像有点跑题了哈哈哈哈哈哈哈，不管了就这样吧，就是这么任性ヾ(≧O≦)〃嗷~
