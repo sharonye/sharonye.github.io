@@ -10,7 +10,6 @@ $code_text:#40818e;
 $main_bg: #f7f7f7;
 $body_bg: #f3f3f3;
 $tags_bg: #cd7675;
-$code_bg: #eaf1f4;
 
 /* ******* border color ******** */
 $border_light: #e2e2e2;
@@ -417,13 +416,14 @@ body{
 		font-weight:normal;
 		padding:2px 4px;
 		color:$code_text;
-		background-color: $code_bg;
 		border-radius:4px;
-		word-break:break-all;
+		border:1px dotted #89bac4;
+		margin:0 5px;
 	}
 	blockquote{
-		border-left: 7px solid #baada5;
-		background-color: #e5e2e0;
+		border: 1px solid #aea199;
+		border-left: 7px solid #aea199;
+		border-radius: 0 10px 10px 0;
 		padding:5px 20px;
 		margin-bottom:10px;
 		p{
@@ -434,11 +434,12 @@ body{
 	pre{
 		// font-family:"Source Code Pro",monospace;
 		margin-bottom:10px;
-		background-color: #4a3a32;
-		padding:10px;
 		overflow-x:auto;
 		line-height:1.2;
 		code{
+			color:inherit;
+			border:1px solid #aea199;
+			padding:10px;
 			background-color: transparent;
 		}
 	}
