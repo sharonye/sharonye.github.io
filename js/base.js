@@ -1,13 +1,9 @@
-window.onload = function() {
-	var c_height = $(window).height() - $(".site-header").height() - $(".site-footer").height() -30;
+$(function() {
+
+	var c_height = $(window).height() -218;
 	$(".page-content").css("min-height",c_height+"px");
-} 
-$(document).ready(function() {
 
-	/*var c_height = $(window).height() - $(".site-header").height() - $(".site-footer").height();
-	$(".page-content").css("min-height",c_height+"px");*/
-
-	$(window).scroll(function() {
+	/*$(window).scroll(function() {
 		if($(window).scrollTop()>500){
 			$("#to-top").css("display","block");
 		}else{
@@ -19,6 +15,6 @@ $(document).ready(function() {
 		$('html,body').animate({
 			scrollTop: 0
 		}, 300);
-	});
+	});*/
 
 });

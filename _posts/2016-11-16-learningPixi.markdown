@@ -2,10 +2,11 @@
 layout: post
 title:  Pixi使用教程
 date:   2016-11-16 18:00:06 +0800
-categories: 前端笔记
+categories: translation
 tags:
 - f2e 
 - Pixi 
+excerpt: 由于公司的项目中用到Pixi.js，学习的过程中顺便翻译了下。（真是闲的无聊……）
 ---
 
 原文地址：[Learning Pixi](https://github.com/kittykatattack/learningPixi)
@@ -23,13 +24,13 @@ tags:
 
 这是你使用Pixi所需的唯一一个文件，至于仓库里的其他文件可以直接无视，因为并不需要它们。
 
+<!--more-->
+
 接下来，创建一个基础的HTML页面，用`<script>`标签将你刚刚下载的`pixi.min.js`文件引入进来。`<script>`标签的`src`应该是相对于你跑web服务的根目录的路径。你的`<script>`标签应该看起来像是这样：
 
 ```html
 <script src="pixi.min.js"></script>
 ```
-
-<!--more-->
 
 以下是一个基础的HTML页面例子，链接Pixi并且测试其是否工作：
 
@@ -646,4 +647,4 @@ function setup() {
 
 ![image](https://github.com/kittykatattack/learningPixi/raw/master/examples/images/screenshots/03.png)
 
-（啊啊啊作者讲的太细了好啰嗦呀，好气哦不翻了！）
+（太长了……之后有时间再翻完吧……）

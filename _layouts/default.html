@@ -9,19 +9,24 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <!-- <div class="rolling-pink"></div> -->
-        {% include sidebar.html %}
+        
         {{ content }}
+        
       </div>
     </div>
-
-    <!-- {% include catalog.html %} -->
-
-    {% include totop.html %}
 
     {% include footer.html %}
 
     {% include jsblock.html %}
+
+    <script>
+      $(document).ready(function(){
+        if($(".home").length == 0){
+          $(".avatar").attr("href","{{site.url}}");
+          $(".logo-prompt").text("Back to Home");
+        }
+      });
+    </script>
 
   </body>
 

@@ -2,10 +2,11 @@
 layout: post
 title:  测试markdown样式
 date:   2016-10-8 17:05:06 +0800
-categories: 前端笔记
+categories: notes
 tags: 
 - f2e 
 - markdown
+excerpt: 测试markdown的样式。
 ---
 
 # 一级标题
@@ -20,9 +21,11 @@ tags:
 
 ###### 六级标题
 
+<!--more-->
+
 > 这是一个引用的段落这是一个引用的段落这是一个引用的段落这是一个引用的段落这是一个引用的段落这是一个引用的段落。
 
-<!--more-->
+
 `单行代码 $ git push -u origin master` 
 
 - 无序列表第一项

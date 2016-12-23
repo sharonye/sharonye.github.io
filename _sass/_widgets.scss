@@ -1,0 +1,250 @@
+/* header */
+.site-header{
+	padding:35px 0;
+	.wrapper{
+		height:86px;
+	}
+	.avatar{
+		display:block;
+		position:absolute;
+		left:50%;
+		margin-left:-43px;
+		width:86px;
+		height:86px;
+		border-radius:50%;
+		overflow:hidden;
+		box-shadow: 0 0 5px 5px #ddd;
+		animation:bounce 0.8s both;
+		img{
+			width:100%;
+			height:100%;
+		}
+		&:hover+.logo-prompt{
+			display:inline-block!important;
+		}
+	}
+	.logo-prompt{
+		position:absolute;
+		display:none;
+		vertical-align:middle;
+		padding:5px;
+		border-radius:3px;
+		background:#666;
+		background:rgba(0,0,0,.5);
+		left:50%;
+		margin-left:70px;
+		color:#fff;
+		font-family:"Source Code Pro",Arial,sans-serif;
+		font-size:12px;
+		text-align:center;
+		line-height:1.2;
+		top:50%;
+		margin-top:-10px;
+		&:before{
+			content:'';
+			border-width:5px 5px 5px 0;
+			border-style:solid;
+			border-color:transparent #666;
+			border-color:transparent rgba(0,0,0,.5);
+			position:absolute;
+			top:50%;
+			left:-5px;
+			margin-top:-5px;
+		}
+	}
+}
+
+/* footer */
+.site-footer{
+	padding:20px 0;
+	p{
+		font-family:"Source Code Pro",Arial,sans-serif;
+		font-size:12px;
+		color:#999;
+		text-align:center;
+		a{
+			font-family:"Pacifico","Source Code Pro",Arial,sans-serif;
+			color:#666;
+		}
+	}
+}
+
+/* divider */
+.divider{
+	height:1px;
+	margin:30px 0;
+	background:#ddd;
+	background:-webkit-gradient(linear, left top, right top, from(rgba(255,255,255,0)), color-stop(#ccc), to(rgba(255,255,255,0)));
+	background:-webkit-linear-gradient(left, rgba(255,255,255,0), #ccc, rgba(255,255,255,0));
+	background:linear-gradient(to right, rgba(255,255,255,0), #ccc, rgba(255,255,255,0));
+}
+
+
+/* home */
+.home{
+	.post-list>li{
+		padding:20px;
+		position:relative;
+		margin-bottom:30px;
+		&:last-child{
+			margin-bottom:0;
+		}
+		h2{
+			color:#666;
+			font-size:18px;
+			margin-bottom:10px;
+		}
+		.post-date{
+			font-size:12px;
+			color: #999;
+		}
+		.tagslist{
+			display:inline-block;
+			margin-left:10px;
+			li{
+				display: inline-block;
+				font-size:12px;
+				color:#666;
+				&:before{
+					content:'#';
+				}
+				&+li{
+					margin-left:5px;
+				}
+			}
+		}
+		@media screen and (min-width: 768px) {
+			h2{				
+		    	font-size:20px;
+			}
+		}
+	}
+}
+
+.post-content{
+	position:relative;
+	margin: 15px 0;
+	font-size:14px;
+	line-height:1.6;
+	h1{
+		font-size:22px;
+	}
+	h2{
+		font-size:20px;
+	}
+	h3{
+		font-size:18px;
+	}
+	h4{
+		font-size:16px;
+	}
+	h5{
+		font-size:14px;
+	}
+	h6{
+		font-size:12px;
+	}
+	h1,h2,h3,h4,h5,h6{
+		color:#666;
+		margin:25px 0 15px;
+	}
+	hr{
+		margin:20px 0;
+	}
+	a{
+		color:#4078c0;
+		&:hover{
+			text-decoration:underline;
+		}
+	}
+	p{
+		text-indent: 2em;
+		margin-bottom:20px;
+		line-height:1.6;
+	}
+	ul{
+		margin-bottom:20px;
+		li{
+			list-style:disc inside none;
+			line-height:1.6;
+			margin-bottom:10px;
+			p{
+				text-indent:0;
+			}
+		}
+	}
+	code{
+		font-family: Consolas,Arial,sans-serif;
+		font-weight:normal;
+		padding:2px 6px;
+		color:#333;
+		background-color: #f3f3f3;
+		margin:0 5px;
+	}
+	blockquote{
+		border-left: 5px solid #ccc;
+		background-color: #eee;
+		padding:5px 30px;
+		margin-bottom:20px;
+		p{
+			text-indent:0;
+			margin-bottom:0;
+		}
+	}
+	pre{
+		margin-bottom:20px;
+		overflow-x:auto;
+		line-height:1.2;
+		background-color: #f7f7f7;
+		code{
+			color:inherit;
+			padding:10px;
+			background-color: transparent;
+		}
+	}
+}
+
+
+/* article */
+.post{
+	overflow:hidden;
+	article{
+		padding:25px 20px;
+		.post-header{
+			margin-bottom:20px;
+			h1{
+				color:#666;
+				font-size:22px;
+				text-align:center;
+			}
+			.post-meta{
+				font-size:12px;
+				margin:10px 0;
+				text-align:center;
+				font-family:"Source Code Pro",Arial,sans-serif;
+			}
+		}
+		.comment-block{
+			margin-bottom: 20px;
+		}
+		.relative-posts{
+			margin-bottom:30px;
+			padding:15px 0;
+			p{
+				text-align:center;
+				font-size:14px;
+				font-family:"Source Code Pro",Arial,sans-serif;
+				a{
+					color:#886f5e;
+					&:hover{
+						text-decoration:underline;
+					}
+				}
+				.backtohome{
+					margin:0 20px;
+					color:#666;
+				}
+			}
+		}
+	}
+}

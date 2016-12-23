@@ -4,21 +4,21 @@ layout: default
 
 <div class="home">
 
-  <!-- <h1 class="page-heading">Posts</h1> -->
-
   <ul class="post-list">
     {% for post in site.posts %}
       <li>
+
         <h2>
           <a class="post-link" href="{{ post.url }}">{{ post.title }}</a>
         </h2>
 
-        <span class="post-date">发布于 {{ post.date | date: "%F" }}</span>
-        {% assign post_part = {{post.content}} | split: "<!--more-->" %}
         <div class="post-content">
-          {{post_part.first}}
-          <a href="{{ post.url }}" class="read-more">↓↓↓阅读全文↓↓↓</a>
+          {{post.excerpt}}
         </div>
+
+        <span class="post-date">
+          {{ post.date | date: "%B %d, %Y" | upcase }}
+        </span>
 
         {% if post.tags | size != 0 %}
           <ul class="tagslist">
@@ -28,13 +28,8 @@ layout: default
           </ul>
         {% endif %}
 
-        <span class="ds-thread-count" data-thread-key="{{ post.id }}"></span>
-        
-
       </li>
     {% endfor %}
   </ul>
-
-  <!-- <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p> -->
 
 </div>

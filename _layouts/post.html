@@ -6,45 +6,30 @@ layout: default
 
     <header class="post-header">
       <h1 class="post-title">{{ page.title }}</h1>
-      <p class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span>{{ page.author }}</span>{% endif %}</p>
-      {% if page.categories | size != 0 %}
-        <ul class="catelist">
-        {% for item in page.categories %}
-          <li><a href="" title="">{{item}}</a></li>
-        {% endfor %}
-        </ul>
-      {% endif %}
-      {% if page.tags | size != 0 %}
-        <ul class="tagslist">
-        {% for item in page.tags %}
-          <li><a href="" title="">{{item}}</a></li>
-        {% endfor %}
-        </ul>
-      {% endif %}
+      <p class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>{% if page.author %} • <span>{{ page.author }}</span>{% endif %}</p>
     </header>
+
+    <div class="divider"></div>
 
     <div class="post-content">
       {{ content }}
     </div>
 
+    <div class="divider"></div>
+
     <div class="relative-posts">
-      <ul>
+      <p>
         {% if page.previous %}
-          <li><span>上一篇:</span><a href="{{page.previous.url}}">{{page.previous.title}}</a></li>
-        {% else %}
-          <li><span>上一篇:</span><span>没有更多了┑(￣Д ￣)┍</span></li>
+          <a href="{{page.previous.url}}">&laquo; Prev</a>
         {% endif %}
+        <a class="backtohome" href="{{ site.url }}">HOME</a>
         {% if page.next %}
-          <li><span>下一篇:</span><a href="{{page.next.url}}">{{page.next.title}}</a></li>
-        {% else %}
-          <li><span>下一篇:</span><span>没有更多了┑(￣Д ￣)┍</span></li>
+          <a href="{{page.next.url}}">Next &raquo;</a>
         {% endif %}
-      </ul>
+      </p>
     </div>
 
     <div class="comment-block" id="comments">
-      <!-- <p>评论功能暂未开放，有什么想说的你就憋着吧（笑）</p> -->
-
       <!-- 多说评论框 start -->
       <div class="ds-thread" data-thread-key="{{ page.id }}" data-title="{{ page.title }}" data-url="{{ page.url}}"></div>
       <!-- 多说评论框 end -->

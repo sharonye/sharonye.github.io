@@ -1,19 +1,8 @@
 <header class="site-header">
-
-  <div class="top-nav">
     <div class="wrapper">
-      <a href="{{site.url}}" class="logo" alt="sharon's blog"></a>
-      <nav class="site-nav">
-        <a href="{{site.url}}" class="active">HOME</a>
-        <a href="{{site.url}}about">ABOUT</a>
-      </nav>
+      <a class="avatar" href={{"about/index.html" | prepend:site.url}}>
+        <img src={{"/assets/img/author.jpg" | prepend:site.baseurl}} alt="">
+      </a>
+      <span class="logo-prompt">About the Author</span>
     </div>
-  </div>
-  <div class="wrapper">
-    <hgroup>
-      <h1><a href="{{site.url}}">Sharon's blog</a></h1>
-      <h2>Welcome to Sharon's blog.</h2>
-    </hgroup>
-  </div>
-
 </header>
