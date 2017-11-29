@@ -1,0 +1,28 @@
+---
+layout: post
+title:  使用Fiddler调试页面
+date:   2017-11-29 09:20:06 +0800
+categories: notes
+tags:
+- f2e 
+- fiddler 
+excerpt: 关于使用Fiddler重定向AutoResponder来替换线上网页资源调试页面。
+---
+
+上周面试的时候刚被问到怎么调试线上的页面，回来就遇到这么个状况了，真的是无巧不成书……
+
+Anyway，我决定使用Fiddler。Fiddler是通过改写HTTP代理，让数据从它那通过，来监控并且截取到数据。此处仅对如何使用AutoResponder来调试线上页面做一个简单的记录，其他更多的功能待深入研究后会再做一个总结。
+
+> Fiddler是一个HTTP协议调试代理工具，它是位于客户端和服务器的HTTP代理，它能记录所有客户端和服务器的HTTP和HTTPS请求响应，进行截获、重发、编辑、转存等操作；允许监视、设置断点，甚至修改输入输出数据，Fiddler包含了一个强大的基于事件脚本的子系统，并且能使用.net语言进行扩展。
+
+<!--more-->
+
+在浏览器中打开网页的时候，Fiddler界面中会显示出会话列表，选中任意资源请求拖动到右侧的AutoResponder下，然后选择本地文件替换它，刷新浏览器后即可看到替换后的效果，如此一来便可以很方便地用正式环境来验证本地文件进行调试了。
+
+此处有遇到一个问题，发现chrome的页面请求无法抓取，后来发现是因为chrome安装代理管理的插件SwitchySharp，它会屏蔽Fiddler的设置，把该插件禁用即可。另外用来屏蔽广告的adsafe插件也可能导致Fiddler无法正常抓包，总之暂且禁用就好。
+
+参考文章：
+- [【web页面调试-Fiddler】用fiddler替换线上网页资源调试页面](http://blog.csdn.net/dengpeng0419/article/details/56680649)
+- [Fiddler抓包【4】_重定向AutoResponder](http://www.cnblogs.com/sjl179947253/p/7625365.html)
+更多参考：
+- [Fiddler 抓包工具总结](https://www.cnblogs.com/yyhh/p/5140852.html)
