@@ -156,3 +156,5 @@ function addClass(element,value){
 	}
 }
 ```
+
+~~啊，用习惯了jQuery以后总觉得原生js好麻烦啊::>_<::~~
