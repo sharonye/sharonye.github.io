@@ -1,0 +1,92 @@
+---
+layout: post
+title:  js中的this
+date:   2017-12-04 10:00:06 +0800
+categories: notes
+tags:
+- f2e 
+- JavaScript 
+excerpt: 对js中this关键字的理解。 
+---
+
+之前对`this`的用法一直不够清楚，今天回头又看了遍感觉终于理清了思路。
+
+首先总的来说我们可以理解为，**this指的就是调用函数的那个对象**。
+
+### 用法
+
+```javascript
+// 1.函数调用
+foo();
+```
+
+当我们直接调用一个函数的时候，这里的`this`会指向`全局对象`，在浏览器环境中即为`window`对象
+
+```javascript
+// 2.方法调用
+test.foo();
+```
+
+在这个例子中，`foo`作为`test`对象的方法调用，此时的`this`指向的就是这个`test`对象
+
+```javascript
+// 3.调用构造函数
+new foo();
+```
+
+在这种情况下，`this`将会指向构造函数所创建的新对象
+
+```javascript
+// 4.显式的设置this
+function foo(a,b,c){}
+
+var bar = {};
+foo.apply(bar,[1,2,3]);
+foo.call(bar,1,2,3);
+```
+
+当使用函数对象的`apply`或者`call`方法时，函数内的`this`会被显式设置为函数调用的第一个参数，例子中就是在调用`foo`函数时将它的`this`指向了`bar`
+
+### 例子
+
+```javascript
+Foo.method = function(){
+	function test(){
+		// 此处的this指向全局对象
+	}
+	test();
+}
+```
+
+此处容易误以为`this`指向`Foo`，而实际上这里因为直接调用`test()`，所以`test()`内部的`this`指向的是全局函数，若要获取对`Foo`对象的引用，需要在`method`函数内部创建一个局部变量指向`Foo`对象
+
+```javascript
+Foo.method = function(){
+	var that = this; // 这里的this才是指向Foo
+	function test(){
+		// 使用that来指向Foo对象
+	}
+	test();
+}
+```
+
+另外还有一个例子：
+
+```javascript
+var a = 10;
+
+function test(){
+	a = 5;
+	alert(a);
+	alert(this.a);
+	var a;
+	alert(this.a);
+	alert(a);
+}
+
+// 问：执行test()和new test()的结果分别是什么？
+```
+
+上面这个例子中，执行`test()`的结果是：`5,10,10,5`; 执行`new test()`的结果是`5,undefined,undefined,5`
+
+首先在函数内部存在变量提升，所以`var a`会被提升到函数开头，函数内部的`a`即为一个局部变量，并且被赋值了`a = 5`，所以两个`alert(a)`的结果都是`5`; 然后直接调用`test()`的时候，`this`指向的是全局对象，所以`alert(this.a)`的结果为`10`; 而`new test()`的时候，`this`指向的是创建的新对象，新对象并未定义属性`a`，所以`alert(this.a)`的结果为`undefined`
