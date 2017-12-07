@@ -1,0 +1,128 @@
+---
+layout: post
+title:  git笔记
+date:   2017-12-07 16:10:06 +0800
+categories: notes
+tags:
+- git 
+excerpt: 各种常用的git基本操作命令总结。
+---
+
+- 版本回退
+
+```
+git reset --hard HEAD^
+```
+`HEAD`表示的是当前版本，`HEAD^`表示上一个版本，`HEAD^^`表示上上个版本，`HEAD~100`表示往上100个版本。
+或者也可以用
+```
+git reset --hard [commit_id]
+```
+`commit_id`即为版本号，是一串很长的十六进制数，输入的时候没必要写全，只写前几位即可，git会自动去找。（可以使用`git log`命令查看版本库的历史记录，查看版本号）
+
+***
+
+- 撤销修改
+
+```
+git checkout -- [filename]
+```
+如果还未把工作区的内容add到暂存区，上面的操作可以撤销工作区的修改，回到和版本库一样的状态。这个命令其实是就用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。*（注意这个命令与切换分支命令`git checkout`的区别）*
+
+```
+git reset HEAD [filename]
+```
+如果已经把工作区的内容add到暂存区，可以使用上面这个命令把暂存区的修改撤销
+
+***
+
+- 从版本库中删除文件
+
+```
+git rm [filename]
+```
+删除后需要`git commit`
+
+***
+
+- 创建切换分支
+
+```
+git checkout -b [dev]
+```
+上面的命令表示创建`dev`分支并切换到`dev`分支，相当于以下两条命令：
+```
+git branch [dev]
+git checkout [dev]
+```
+
+用`git branch`命令可以查看分支，当前分支前会标有星号
+
+***
+
+- 合并分支
+
+```
+git merge [branchname]
+```
+用于合并指定分支到当前分支
+
+***
+
+- 删除分支
+
+```
+git branch -d [branchname]
+```
+如果要丢弃一个还没有被合并过的分支，可以通过`git branch -D [branchname]`强行删除。
+
+***
+
+- 推送分支
+
+```
+git push origin master
+```
+把分支推送到远程库。`origin`是远程仓库的默认名称，`master`是要推送的分支名称，比如要推送`dev`分支，就可以使用`git push origin dev`
+
+***
+
+- 抓取分支
+
+当clone一个远程库到本地时，默认情况下只能看到`master`分支，如果要创建远程`origin`的`dev`分支到本地，可以使用以下命令：
+```
+git checkout -b dev origin/dev
+```
+
+要抓取远程库最新的提交到本地可以使用`git pull`命令。如果本地分支与远程分支没有建立链接会提示失败，可以使用`git branch --set-upstream dev origin/dev`设置本地`dev`分支与远程`origin/dev`分支的链接。
+
+***
+
+- 标签
+
+我们知道`commit_id`可以标识每个不同的版本，但是由于它太长且无规律，并不方便记忆和查找，因此可以通过创建标签来给每个版本打上容易记住且有意义的标识。
+
+使用`git tag [tagname]`命令可以给当前分支打一个标签，比如
+```
+git tag v1.0
+```
+默认标签是打在最新提交的commit上，如果要为历史版本打标签，可以使用`git tag [tagname] [commit_id]`，比如
+```
+git tag v0.9 6224937
+```
+
+带有说明的标签：`git tag -a [tagname] -m "blablabla" [commit_id]`
+
+删除标签：`git tag -d [tagname]`
+
+推送标签到远程：`git push origin [tagname]` 或者 `git push origin --tags`（所有标签）
+
+（另外，`git tag`命令查看所有标签，`git show [tagname]`查看标签信息）
+
+***
+
+- 其他
+
+[自定义git/配置别名](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375234012342f90be1fc4d81446c967bbdc19e7c03d3000)
+
+[常用Git命令清单](http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html)
