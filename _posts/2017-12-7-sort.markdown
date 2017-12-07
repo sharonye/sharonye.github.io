@@ -1,0 +1,56 @@
+---
+layout: post
+title:  冒泡与快排——两种经典数组排序算法js实现
+date:   2017-12-07 10:00:06 +0800
+categories: notes
+tags:
+- JavaScript 
+excerpt: 常见的两种数组排序算法。
+---
+
+### 冒泡排序
+
+很简单的排序方式，遍历数组，比较相邻两项的大小，如果前一项比后一项大，就交换两者位置，每次循环都将剩下元素中最大的一个冒泡到数组的末端。
+
+```javascript
+function bubbleSort(arr){
+	for(var i = 0; i < arr.length-1; i++){
+		for(var j=0; j < arr.length-i-1; j++){
+			if(arr[j] > arr[j+1]){
+				var temp = arr[j];
+				arr[j] = arr[j+1];
+				arr[j+1] = temp;
+			}
+		}
+	}
+	return arr;
+}
+```
+
+### 快速排序
+
+使用递归的思想。在数组中抽取一项作为基准值，余下的内容中比基准值小的放在它左边，比它大的放在右边，再对左右两边的数组分别执行以上操作，设置好出口。
+
+```javascript
+function quickSort(arr){
+	if (arr.length <= 1){
+		return arr; //数组长度小于等于1就直接返回
+	}
+	var pivotIndex = Math.floor(arr.length/2); //基准点ixdex
+	var pivot = arr.splice(pivotIndex,1)[0]; //取得基准点值，splice方法在删除指定项目后会返回被删除的项目数组
+	var left = [];
+	var right = [];
+
+	// 遍历删除了基准值之后的数组
+	for(var i = 0; i<arr.length; i++){
+		if(arr[i] < pivot){
+			left.push(arr[i]); //比基准值小的放左边
+		}
+		else{
+			right.push(arr[i]); //比基准值大的放右边
+		}
+	}
+	// 对左右两个数组递归调用该方法
+	return quickSort(left).concat([pivot],quickSort(right));
+}
+```
