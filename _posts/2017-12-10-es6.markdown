@@ -9,13 +9,13 @@ tags:
 excerpt: 简单总结ES6中最常用的一些新特性。
 ---
 
-#### let,const
+### let,const
 
 - `let`声明的变量只在当前的代码块内有效，实际上为javascript新增了块级作用域
 
 - `const`用来声明常量，一旦声明，常量的值就不能改变
 
-#### class,extends,super
+### class,extends,super
 
 ES6中引入Class（类）的概念使得对象原型的写法更加清晰，更像面向对象编程的语法。
 
@@ -45,7 +45,7 @@ cat.says('meow');
 
 定义`Cat`类时使用了`extends`关键字实现了继承，从`Animal`类继承了其所有属性和方法。`super`关键字表示父类的构造函数，用来新建父类的`this`对象。子类必须在构造方法中使用`super`方法，因为子类没有自己的`this`对象，而是继承父类的`this`对象。
 
-#### 箭头函数
+### 箭头函数
 
 ```javascript
 var f = v => v;
@@ -118,7 +118,7 @@ animal.says('hi');  //animal says hi
 
 这样就比较好理解了——**箭头函数内的`this`就是定义时所在的对象，而不是使用时所在的对象。**
 
-#### 模板字符串
+### 模板字符串
 
 传统的js输出模板经常需要写一大堆的加号引号十分不方便：
 
@@ -143,7 +143,7 @@ $('#result').append(`
 
 模板字符串使用反引号(`)标识，用${}来引用变量，且所有的空格和缩进都会被保留在输出之中。
 
-#### 解构赋值
+### 解构赋值
 
 解构赋值本质上属于“模式匹配”，只要等号两边的模式相同，左边的变量就会被赋予对应的值。
 
@@ -218,7 +218,7 @@ foo // error: foo is not defined
 
 上面代码中，`foo`是匹配的模式，`baz`才是变量。真正被赋值的是变量`baz`，而不是模式`foo`。
 
-#### Promise对象
+### Promise对象
 
 ```javascript
 const promise = new Promise(function(resolve,reject){
@@ -304,7 +304,8 @@ const p = Promise.race([p1, p2, p3]);
 
 上面代码中，只要p1、p2、p3之中有一个实例率先改变状态，p的状态就跟着改变。那个率先改变的Promise实例的返回值，就传递给p的回调函数。
 
-#### 参考
+### 参考
 
 [ECMAScript 6 入门](http://es6.ruanyifeng.com/)
+
 [30分钟掌握ES6/ES2015核心内容](http://www.jianshu.com/p/ebfeb687eb70)
