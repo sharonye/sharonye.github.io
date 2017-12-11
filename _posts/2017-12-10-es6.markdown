@@ -1,0 +1,310 @@
+---
+layout: post
+title:  ES6常用新特性小结
+date:   2017-12-10 15:00:06 +0800
+categories: notes
+tags:
+- JavaScript 
+- ES6 
+excerpt: 简单总结ES6中最常用的一些新特性。
+---
+
+#### let,const
+
+- `let`声明的变量只在当前的代码块内有效，实际上为javascript新增了块级作用域
+
+- `const`用来声明常量，一旦声明，常量的值就不能改变
+
+#### class,extends,super
+
+ES6中引入Class（类）的概念使得对象原型的写法更加清晰，更像面向对象编程的语法。
+
+```javascript
+class Animal {
+	constructor(){
+		this.type = 'animal';
+	}
+	says(msg){
+		console.log(this.type + ' says ' + msg);
+	}
+}
+let animal = new Animal();
+animal.says('hello');
+
+class Cat extends Animal {
+	constructor(){
+		super();
+		this.type = 'cat';
+	}
+}
+let cat = new Cat();
+cat.says('meow');
+```
+
+上面代码定义了一个`Animal`类，其中`constructor`即为构造方法，`this`关键字指向实例对象。*（定义类的方法时不需要`function`关键字）*
+
+定义`Cat`类时使用了`extends`关键字实现了继承，从`Animal`类继承了其所有属性和方法。`super`关键字表示父类的构造函数，用来新建父类的`this`对象。子类必须在构造方法中使用`super`方法，因为子类没有自己的`this`对象，而是继承父类的`this`对象。
+
+#### 箭头函数
+
+```javascript
+var f = v => v;
+// 等同于
+var f = function(v){
+	return v;
+};
+```
+
+```javascript
+var f = () => 5;
+// 等同于
+var f = function(){
+	return 5;
+}
+```
+
+```javascript
+var sum = (x,y) => x+y;
+```
+
+**注意：箭头函数内的`this`就是定义时所在的对象，而不是使用时所在的对象。**因为箭头函数根本没有自己的`this`，它的`this`是继承外面的，因此内部的`this`就是外层代码块的`this`。
+
+例如在对象方法中使用`this`
+
+```javascript
+class Animal {
+    constructor(){
+        this.type = 'animal';
+    }
+    says(msg){
+        setTimeout(function(){
+            console.log(this.type + ' says ' + msg);
+        }, 1000);
+    }
+}
+
+var animal = new Animal();
+animal.says('hi');  //undefined says hi
+```
+
+上面代码中`this.type`输出的是`undefined`，原因是setTimeout里面那个函数的`this`指向的是全局对象。这种时候我们通常会在对象方法内用一个`that`来指代`this`，比如
+
+```javascript
+says(msg){
+	var that = this;
+    setTimeout(function(){
+        console.log(that.type + ' says ' + msg);
+    }, 1000);
+}
+```
+
+但如果使用箭头函数则无需这样
+
+```javascript
+class Animal {
+    constructor(){
+        this.type = 'animal';
+    }
+    says(msg){
+        setTimeout( () => {
+            console.log(this.type + ' says ' + msg);
+        }, 1000);
+    }
+}
+
+var animal = new Animal();
+animal.says('hi');  //animal says hi
+```
+
+这样就比较好理解了——**箭头函数内的`this`就是定义时所在的对象，而不是使用时所在的对象。**
+
+#### 模板字符串
+
+传统的js输出模板经常需要写一大堆的加号引号十分不方便：
+
+```javascript
+$('#result').append(
+	'There are <b>' + basket.count + '</b> ' +
+	'items in your basket, ' +
+	'<em>' + basket.onSale +
+	'</em> are on sale!'
+);
+```
+
+使用模板字符串则可以简化为：
+
+```javascript
+$('#result').append(`
+	There are <b>${basket.count}</b> items
+	in your basket, <em>${basket.onSale}</em>
+	are on sale!
+`);
+```
+
+模板字符串使用反引号(`)标识，用${}来引用变量，且所有的空格和缩进都会被保留在输出之中。
+
+#### 解构赋值
+
+解构赋值本质上属于“模式匹配”，只要等号两边的模式相同，左边的变量就会被赋予对应的值。
+
+```javascript
+let [a, b, c] = [1, 2, 3]; // a=1, b=2, c=3
+let [a, ...b] = [1, 2, 3]; // a=1, b=[2,3]
+```
+
+解构赋值允许指定默认值。
+
+```javascript
+let [x, y = 'b'] = ['a']; // x='a', y='b'
+```
+
+一个位置的值只有在严格等于（`===`）`undefined`时默认值才会生效。
+
+```javascript
+let [x = 1] = []; // x=1
+let [x = 1] = [undefined]; // x=1
+let [x = 1] = [null]; // x=null, 因为null不严格等于undefined
+```
+
+如果默认值是一个表达式，那么这个表达式是惰性求值的，即只有在用到的时候，才会求值。
+
+```javascript
+function f(){
+	console.log("a");
+}
+let [x = f()] = [1];
+
+// f函数不会执行，因为没有用到这个默认值，实际等价于下面的代码
+
+let x;
+if ([1][0] === undefined) {
+	x = f();
+} else {
+	x = [1][0];
+}
+```
+
+对象的解构赋值
+
+```javascript
+let { foo, bar } = { foo: "aaa", bar: "bbb" };
+foo // "aaa"
+bar // "bbb"
+
+let { bar, foo } = { foo: "aaa", bar: "bbb" };
+foo // "aaa"
+bar // "bbb"
+
+let { baz } = { foo: "aaa", bar: "bbb" };
+baz // undefined
+
+let { foo: baz } = { foo: 'aaa', bar: 'bbb' };
+baz // "aaa"
+```
+
+**对象的解构赋值其实是下面形式的简写**
+
+```javascript
+let { foo: foo, bar: bar } = { foo: "aaa", bar: "bbb" };
+```
+
+对象的解构赋值的内部机制，是先找到同名属性，然后再赋给对应的变量。**真正被赋值的是后者，而不是前者。**
+
+```javascript
+let { foo: baz } = { foo: "aaa", bar: "bbb" };
+baz // "aaa"
+foo // error: foo is not defined
+```
+
+上面代码中，`foo`是匹配的模式，`baz`才是变量。真正被赋值的是变量`baz`，而不是模式`foo`。
+
+#### Promise对象
+
+```javascript
+const promise = new Promise(function(resolve,reject){
+
+	if(/* 异步操作成功 */){
+		resolve(value);
+	} else {
+		reject(error);
+	}
+});
+```
+
+`resolve`和`reject`是两个函数，由JavaScript引擎提供，不用自己部署。`resolve`会将Promise对象的状态从`未完成`变为`成功`（即从`pending`变为`resolved`），`reject`会将Promise对象的状态从`未完成`变为`失败`（即从`pending`变为`rejected`）
+
+Promise实例生成以后，可以用`then`方法分别指定`resolved`状态和`rejected`状态的回调函数。
+
+```javascript
+promise.then(function(value){
+	// success
+}, function(error){
+	// failure
+});
+```
+
+一个异步加载图片的例子：
+
+```javascript
+function loadImageAsync(url) {
+  return new Promise(function(resolve, reject) {
+    const image = new Image();
+
+    image.onload = function() {
+      resolve(image);
+    };
+
+    image.onerror = function() {
+      reject(new Error('Could not load image at ' + url));
+    };
+
+    image.src = url;
+  });
+}
+```
+Promise对象的`.catch()`方法相当于`.then(null,rejection)`，用于指定发生错误的回调函数。
+Promise对象的错误具有“冒泡”性质，会一直向后传递，直到被捕获为止。也就是说，错误总是会被下一个`catch`语句捕获。一般来说，不要在`then`方法里面定义`Reject`状态的回调函数（即`then`的第二个参数），总是使用`catch`方法。
+
+```javascript
+// bad
+promise
+  .then(function(data) {
+    // success
+  }, function(err) {
+    // error
+  });
+
+// good
+promise
+  .then(function(data) { //cb
+    // success
+  })
+  .catch(function(err) {
+    // error
+  });
+```
+
+`Promise.all`方法用于将多个Promise实例包装成一个新的Promise实例。
+
+```javascript
+const p = Promise.all([p1, p2, p3]);
+```
+
+p的状态由p1、p2、p3决定，分成两种情况：
+
+1. 只有p1、p2、p3的状态都变成fulfilled，p的状态才会变成fulfilled，此时p1、p2、p3的返回值组成一个数组，传递给p的回调函数。
+
+2. 只要p1、p2、p3之中有一个被rejected，p的状态就变成rejected，此时第一个被reject的实例的返回值，会传递给p的回调函数。
+
+`Promise.race`方法同样是将多个Promise实例包装成一个新的Promise实例。
+
+```javascript
+const p = Promise.race([p1, p2, p3]);
+```
+
+上面代码中，只要p1、p2、p3之中有一个实例率先改变状态，p的状态就跟着改变。那个率先改变的Promise实例的返回值，就传递给p的回调函数。
+
+#### 参考
+
+[ECMAScript 6 入门](http://es6.ruanyifeng.com/)
+[30分钟掌握ES6/ES2015核心内容](http://www.jianshu.com/p/ebfeb687eb70)
